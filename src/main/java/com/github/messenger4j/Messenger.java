@@ -146,7 +146,7 @@ public final class Messenger {
                     .orElseThrow(IllegalArgumentException::new);
             for (JsonElement messagingEvent : messagingEvents) {
                 final Event event = EventFactory.createEvent(messagingEvent.getAsJsonObject());
-                eventHandler.accept(event);
+                //eventHandler.accept(event);
             }
         }
     }
