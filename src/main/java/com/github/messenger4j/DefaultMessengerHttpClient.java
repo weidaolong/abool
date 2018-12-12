@@ -15,14 +15,14 @@ final class DefaultMessengerHttpClient implements MessengerHttpClient {
 
     private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json; charset=utf-8";
 
-//    private final OkHttpClient okHttp = new OkHttpClient();
+    private final OkHttpClient okHttp = new OkHttpClient();
 
-    private final OkHttpClient okHttp;
-
-    {
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 1087));
-        okHttp=new OkHttpClient().newBuilder().proxy(proxy).build();
-    }
+//    private final OkHttpClient okHttp;
+//
+//    {
+//        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 1087));
+//        okHttp=new OkHttpClient().newBuilder().proxy(proxy).build();
+//    }
 
     @Override
     public HttpResponse execute(HttpMethod httpMethod, String url, String jsonBody) throws IOException {
