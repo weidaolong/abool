@@ -142,7 +142,7 @@ public final class Messenger {
         final JsonArray entries = getPropertyAsJsonArray(payloadJsonObject, PROP_ENTRY)
                 .orElseThrow(IllegalArgumentException::new);
         for (JsonElement entry : entries) {
-            final JsonArray messagingEvents = getPropertyAsJsonArray(entry.getAsJsonObject(), PROP_STANDBY)
+            final JsonArray messagingEvents = getPropertyAsJsonArray(entry.getAsJsonObject(), PROP_MESSAGING)
                     .orElseThrow(IllegalArgumentException::new);
             for (JsonElement messagingEvent : messagingEvents) {
                 final Event event = EventFactory.createEvent(messagingEvent.getAsJsonObject());
