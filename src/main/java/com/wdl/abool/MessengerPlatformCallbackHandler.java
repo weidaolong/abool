@@ -127,7 +127,7 @@ public class MessengerPlatformCallbackHandler {
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (MessengerVerificationException e) {
             logger.warn("Processing of callback payload failed: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
     }
 
