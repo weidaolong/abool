@@ -3,6 +3,7 @@ package com.github.messenger4j;
 import static com.github.messenger4j.internal.gson.GsonUtil.Constants.*;
 import static com.github.messenger4j.internal.gson.GsonUtil.getPropertyAsJsonArray;
 import static com.github.messenger4j.internal.gson.GsonUtil.getPropertyAsString;
+import static com.github.messenger4j.internal.gson.GsonUtil.hasProperty;
 import static com.github.messenger4j.spi.MessengerHttpClient.HttpMethod.DELETE;
 import static com.github.messenger4j.spi.MessengerHttpClient.HttpMethod.GET;
 import static com.github.messenger4j.spi.MessengerHttpClient.HttpMethod.POST;
@@ -142,12 +143,23 @@ public final class Messenger {
         final JsonArray entries = getPropertyAsJsonArray(payloadJsonObject, PROP_ENTRY)
                 .orElseThrow(IllegalArgumentException::new);
         for (JsonElement entry : entries) {
-            final JsonArray messagingEvents = getPropertyAsJsonArray(entry.getAsJsonObject(), PROP_MESSAGING)
-                    .orElseThrow(IllegalArgumentException::new);
-            for (JsonElement messagingEvent : messagingEvents) {
-                final Event event = EventFactory.createEvent(messagingEvent.getAsJsonObject());
-                //eventHandler.accept(event);
+            if(hasProperty(entry.getAsJsonObject(), PROP_MESSAGING)){
+                final JsonArray messagingEvents = getPropertyAsJsonArray(entry.getAsJsonObject(), PROP_MESSAGING)
+                        .orElseThrow(IllegalArgumentException::new);
+                for (JsonElement messagingEvent : messagingEvents) {
+                    final Event event = EventFactory.createEvent(messagingEvent.getAsJsonObject());
+                    //eventHandler.accept(event);
+                }
             }
+            if(hasProperty(entry.getAsJsonObject(), PROP_STANDBY)){
+                final JsonArray messagingEvents = getPropertyAsJsonArray(entry.getAsJsonObject(), PROP_STANDBY)
+                        .orElseThrow(IllegalArgumentException::new);
+                for (JsonElement messagingEvent : messagingEvents) {
+                    final Event event = EventFactory.createEvent(messagingEvent.getAsJsonObject());
+                    //eventHandler.accept(event);
+                }
+            }
+
         }
     }
 
